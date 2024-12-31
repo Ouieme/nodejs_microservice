@@ -28,9 +28,9 @@ services:
     volumes:
       - .:/app
       - /app/products/node_modules
-
     env_file:
       - ./products/.env.dev
+
   shopping:
     build:
       dockerfile: Dockerfile
@@ -47,6 +47,7 @@ services:
       - /app/shopping/node_modules
     env_file:
       - ./shopping/.env.dev
+
   customer:
     build:
       dockerfile: Dockerfile
@@ -63,6 +64,7 @@ services:
       - /app/customer/node_modules
     env_file:
       - ./customer/.env.dev
+
   nginx-proxy:
     build:
       dockerfile: Dockerfile
@@ -73,3 +75,10 @@ services:
       - customer
     ports:
       - 80:80
+
+  pandacloud-container:
+    image: 309395755719.dkr.ecr.us-east-1.amazonaws.com/amazon-prime:latest
+    container_name: pandacloud-container
+    ports:
+      - "8080:8080"  # You can change this if necessary
+    restart: always
